@@ -8,10 +8,11 @@ const initial = {
 	stuff: []
 }
 
-//działa chyba
+//działa
 export const actionsDescriptors = {
 	setNames: ["firstName", "lastName"],
-	setAge: ["age"]
+	setAge: ["age"],
+	setStuff: ["stuff"]
 }
 
 export default handleActions(generateActionMutationMap(actionsDescriptors), initial);

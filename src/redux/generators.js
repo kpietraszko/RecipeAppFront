@@ -1,6 +1,5 @@
-//generuję kreatory akcji (dla komponentów) na podstawie deskryptorów
-//w komponencie wywołać przekazując deskryptory i po kropce nazwe akcji: generateActionCreators().setNames({firstName: "Jan", lastName: "Kowalski"})
-export const generateActionCreators = (actionsDescriptors) => {
+//generuję kreatory akcji (dla generatora mapy dispatch) na podstawie deskryptorów
+const generateActionCreators = (actionsDescriptors) => {
 	let actionCreators = {};
 	for (let key in actionsDescriptors) {
 		actionCreators[key] = (payload) => {
@@ -27,4 +26,14 @@ export const generateActionMutationMap = (actionsDescriptors) => {
 		}
 	}
 	return actionToMutationMap;
+}
+//komponent wywołuje to przekazując deskryptory (ktore importuje z konkretnego pliku akcji) i wrzuca do connecta
+//akcje wywołać normalnie: this.props.setNames({firstName: "Jan", lastName: "Kowalski"})
+export const generateMapDispatchToProps = (actionsDescriptors) => {
+	let mapDispatchToProps = {};
+	let actionCreators = generateActionCreators(actionsDescriptors);
+	for (let key in actionsDescriptors) {
+		mapDispatchToProps[key] = actionCreators[key];
+	}
+	return mapDispatchToProps;
 }
