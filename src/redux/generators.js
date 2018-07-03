@@ -31,7 +31,6 @@ const generateThunkCreators = (actionCreators, thunksDescriptors) => {
 	return thunkCreators;
 }
 
-
 //generuję mapowanie (dla handleActions) na podstawie deskryptorów
 export const generateActionMutationMap = (actionsDescriptors) => {
 	const actionToMutationMap = {};
@@ -55,7 +54,7 @@ export const generateMapDispatchToProps = (actionsDescriptors, thunksDescriptors
 	for (let key in actionsDescriptors) {
 		mapDispatchToProps[key] = actionCreators[key];
 		if (thunksCreators && thunksCreators[key])
-			mapDispatchToProps[key + "Thunk"] = thunksCreators[key]; //np bedzie i setNames i setNamesThunk jako propy
+			mapDispatchToProps[key + "Thunk"] = thunksCreators[key]; //np bedzie i setAddress i setAddressThunk jako propy
 	}
 	return mapDispatchToProps;
 }

@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Test from './components/test';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import './styles/App.css';
+import Drawer from './components/responsiveDrawer';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import Main from './components/main';
 
+const styles = () => ({
+  root: {
+    flexGrow: 1,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+  }
+})
 class App extends Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div className="App-intro">
-          <Test/>
+      <MuiThemeProvider>
+        <CssBaseline />
+        <div className={`App ${classes.root}`}>
+          <Drawer />
+          <Main />
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+export default withStyles(styles, { withTheme: true })(App);
