@@ -10,19 +10,25 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import Paper from '@material-ui/core/Paper';
-import mainListItems from './mainListItems';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
+import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/AddCircle';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
 	appBar: {
-		position: 'absolute',
+		// position: 'absolute',
 		marginLeft: drawerWidth,
 		[theme.breakpoints.up('md')]: {
-			width: '100%',//`calc(100% - ${drawerWidth}px)`,
+			width: `calc(100% - ${drawerWidth}px)`,
 		},
-		zIndex: theme.zIndex.drawer + 1
+		//zIndex: theme.zIndex.drawer + 1
 	},
 	navIconHide: {
 		[theme.breakpoints.up('md')]: {
@@ -35,12 +41,7 @@ const styles = theme => ({
 		[theme.breakpoints.up('md')]: {
 			position: 'relative',
 		},
-	},
-	content: {
-		flexGrow: 1,
-		backgroundColor: theme.palette.background.default,
-		padding: theme.spacing.unit * 3,
-	},
+	}
 });
 
 class ResponsiveDrawer extends Component {
@@ -50,19 +51,43 @@ class ResponsiveDrawer extends Component {
 	handleDrawerToggle = () => {
 		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
 	};
-
+	handleDrawerButtonClick = (path) => {
+		this.setState({ redirect: path });
+	}
 	render() {
 		const { classes, theme } = this.props;
 		const drawer = (
 			<div>
-				<div className={classes.toolbar} />
+				<div className={`${classes.toolbar} drawerToolbar`}><Typography variant="title">Aplikacja kulinarna</Typography></div>
 				<Divider />
-				<List>{mainListItems}</List>
+				<List>
+					<div>
+						<ListItem button onClick={() => this.handleDrawerButtonClick("/")}>
+							<ListItemIcon>
+								<RestaurantMenuIcon />
+							</ListItemIcon>
+							<ListItemText primary="Przepisy" />
+						</ListItem>
+						<ListItem button onClick={() => this.handleDrawerButtonClick("/addRecipe")}>
+							<ListItemIcon>
+								<AddIcon />
+							</ListItemIcon>
+							<ListItemText primary="Dodaj przepis" />
+						</ListItem>
+						<ListItem button onClick={() => this.handleDrawerButtonClick("/search")}>
+							<ListItemIcon>
+								<SearchIcon />
+							</ListItemIcon>
+							<ListItemText primary="Wyszukaj" />
+						</ListItem>
+					</div>
+				</List>
 			</div>
 		);
 		return (
 			<React.Fragment>
-				<AppBar position="absolute" className={classes.appBar}>
+				{this.state.redirect && <Redirect to={this.state.redirect} />}
+				<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar>
 						<IconButton
 							color="inherit"
@@ -73,7 +98,7 @@ class ResponsiveDrawer extends Component {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="title" color="inherit" noWrap primary="Responsive drawer">
-							Responsive drawer
+							{this.props.currentPageTitle}
             			</Typography>
 					</Toolbar>
 				</AppBar>
@@ -112,5 +137,9 @@ ResponsiveDrawer.propTypes = {
 	classes: PropTypes.object.isRequired,
 	theme: PropTypes.object.isRequired,
 };
+const mapStateToProps = state => ({
+	currentPageTitle: state.global.currentPageTitle
+})
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default connect(mapStateToProps)
+	(withStyles(styles, { withTheme: true })(ResponsiveDrawer));

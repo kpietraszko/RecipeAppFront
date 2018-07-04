@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
-import test from './test';
+import recipes from './recipes';
+import global from './global';
+import ingredients from './ingredients';
 
-export default combineReducers({test});
+export default combineReducers({ recipes, global, ingredients });

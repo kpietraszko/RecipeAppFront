@@ -1,4 +1,18 @@
 @import 'Fonts';
-
-
-
+.recipeCardContent{
+	padding-top: 0;
+}
+.drawerToolbar{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.chipInput{
+	margin-bottom: 30px;
+}
+.fullWidth{
+	width: 100%;
+}
+.ingredientAmountGridItem{
+	margin-top: 16px;
+}

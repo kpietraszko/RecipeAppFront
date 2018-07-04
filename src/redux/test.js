@@ -20,9 +20,9 @@ export const actionsDescriptors = {
 }
 
 export const thunksDescriptors = {
-	setAddress: (id) => axios.get(`/values/${id}`) //thunk dispatchuje akcję w .then tej funkcji
+	setAddress: (id) => axios.get(`/values/${id}`) //thunk dispatchuje akcję (opisaną wyżej) w .then tej funkcji
 }
 
-export default handleActions(generateActionMutationMap(actionsDescriptors), initial);
+//export default handleActions(generateActionMutationMap(actionsDescriptors), initial);
 
 

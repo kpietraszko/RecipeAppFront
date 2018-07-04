@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './styles/App.css';
-import Drawer from './components/responsiveDrawer';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import ResponsiveDrawer from './components/responsiveDrawer';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import Main from './components/main';
+import myTheme from './myTheme';
 
 const styles = () => ({
   root: {
@@ -14,16 +15,17 @@ const styles = () => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
+    height: '100vh'
   }
 })
 class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={myTheme} >
         <CssBaseline />
         <div className={`App ${classes.root}`}>
-          <Drawer />
+          <ResponsiveDrawer />
           <Main />
         </div>
       </MuiThemeProvider>

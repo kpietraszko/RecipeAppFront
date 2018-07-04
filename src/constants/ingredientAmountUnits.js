@@ -1,0 +1,1 @@
+export default [ "g", "ml", "szkl.", "łyżeczka", "łyżka", "szt."];

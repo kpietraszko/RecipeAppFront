@@ -4,8 +4,13 @@ const generateActionCreators = (actionsDescriptors) => {
 	for (let key in actionsDescriptors) {
 		actionCreators[key] = payload => {
 			let action = { type: key };
+			if (Object.keys(actionsDescriptors[key]).length === 1)
+			{
+				action[actionsDescriptors[key][0]] = payload;
+				return action;
+			}
 			for (let field in actionsDescriptors[key]) { //field to indeks tablicy
-				action[actionsDescriptors[key][field]] = payload[actionsDescriptors[key][field]];
+				action[actionsDescriptors[key][field]] = payload[actionsDescriptors[key][field]]; //payload nie ma pola recipes, to może zepsuć
 			}
 			return action;
 		}

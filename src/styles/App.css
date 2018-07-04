@@ -1,2 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+.recipeCardContent {
+  padding-top: 0; }
+
+.drawerToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.chipInput {
+  margin-bottom: 30px; }
+
+.fullWidth {
+  width: 100%; }
+
+.ingredientAmountGridItem {
+  margin-top: 16px; }
