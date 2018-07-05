@@ -21,9 +21,12 @@ class Main extends Component {
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
 				<Switch>
-					<Route exact path="/" component={RecipeListing} />
 					<Route exact path="/search" component={Search} />
-					<Route exact path="/addRecipe" component={AddRecipe} />
+					<Route exact path="/addRecipe/" component={AddRecipe} />
+					<Route exact path="/editRecipe/:id" component={AddRecipe} />
+					<Route exact path="/notify/:notification?" component={RecipeListing} />
+					<Route exact path="/searchResults" component={RecipeListing} />
+					<Route exact path="/" component={RecipeListing} />
 				</Switch>
 			</main>
 		);

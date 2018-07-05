@@ -16,7 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircle';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const drawerWidth = 240;
@@ -52,7 +52,8 @@ class ResponsiveDrawer extends Component {
 		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
 	};
 	handleDrawerButtonClick = (path) => {
-		this.setState({ redirect: path });
+		//this.setState({ redirect: path });
+		this.props.history.push(path);
 	}
 	render() {
 		const { classes, theme } = this.props;
@@ -86,7 +87,7 @@ class ResponsiveDrawer extends Component {
 		);
 		return (
 			<React.Fragment>
-				{this.state.redirect && <Redirect to={this.state.redirect} />}
+				{/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
 				<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar>
 						<IconButton
@@ -99,7 +100,7 @@ class ResponsiveDrawer extends Component {
 						</IconButton>
 						<Typography variant="title" color="inherit" noWrap primary="Responsive drawer">
 							{this.props.currentPageTitle}
-            			</Typography>
+						</Typography>
 					</Toolbar>
 				</AppBar>
 				<Hidden mdUp>
@@ -142,4 +143,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)
-	(withStyles(styles, { withTheme: true })(ResponsiveDrawer));
+	(withRouter(
+		(withStyles(styles, { withTheme: true })(ResponsiveDrawer))));
