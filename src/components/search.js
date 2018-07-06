@@ -43,12 +43,6 @@ class Search extends Component {
 		let ingredients = this.state.ingredients.slice();
 		ingredients.push(chip);
 		this.setState({ ingredients });
-		let ingredientsAmounts = this.state.ingredientsAmounts.slice();
-		ingredientsAmounts.push("");
-		this.setState({ ingredientsAmounts });
-		let ingredientsUnits = this.state.ingredientsUnits.slice();
-		ingredientsUnits.push(0);
-		this.setState({ ingredientsUnits });
 	}
 	handleDeleteChip = (chip, index) => {
 		let ingredients = this.state.ingredients.slice().filter(element => element != chip);
@@ -59,6 +53,11 @@ class Search extends Component {
 		let ingredientsUnits = this.state.ingredientsUnits.slice();
 		ingredientsUnits.splice(index, 1);
 		this.setState({ ingredientsUnits });
+	}
+	onKeyPress(event) {
+		if (event.which === 13 /* Enter */) {
+			event.preventDefault();
+		}
 	}
 	handleSubmit = e => {
 		e.preventDefault();
@@ -96,7 +95,7 @@ class Search extends Component {
 							type="number"
 							fullWidth
 							className={classes.textField}
-							label="Maksymalny czas przyrządzenia"
+							label="Maksymalny czas przygotowania"
 							helperText="w minutach"
 							value={this.state.timeToMake}
 							onChange={this.handleChange('timeToMake')}

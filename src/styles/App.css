@@ -16,3 +16,8 @@
 
 .ingredientAmountGridItem {
   margin-top: 16px; }
+
+.ratingContainer {
+  padding: 7px 8px;
+  display: flex;
+  align-items: center; }

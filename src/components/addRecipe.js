@@ -157,7 +157,7 @@ class AddRecipe extends Component {
 							type="number"
 							fullWidth
 							className={classes.textField}
-							label="Czas przyrządzenia"
+							label="Czas przygotowania"
 							helperText="w minutach"
 							value={this.state.timeToMake}
 							onChange={this.handleChange('timeToMake')}

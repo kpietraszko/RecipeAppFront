@@ -20,6 +20,10 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import Filters from './filters';
+import RecipeRating from './recipeRating';
+import StarIcon from '@material-ui/icons/Star';
+import DifficultyIcon from '@material-ui/icons/Build';
 
 class recipeListing extends Component {
 	state = {
@@ -71,6 +75,9 @@ class recipeListing extends Component {
 	handleEditClick = (recipe) => {
 		this.setState({ redirectTo: `/editRecipe/${recipe}` })
 	}
+	notifyRatingAdded = () => {
+		this.setState({ snackbar: "Dodano ocenę" });
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -88,10 +95,10 @@ class recipeListing extends Component {
 						'aria-describedby': 'message-id',
 					}}
 					message={<span id="message-id">{this.state.snackbar}</span>} />
-				<Grid container spacing={24}>
+				<Grid container spacing={16}>
 					<Grid item xs={12}>
-						Filtry
-				</Grid>
+						<Filters />
+					</Grid>
 					{this.props.recipes && this.props.recipes.map(recipe =>
 						<Grow key={recipe.id} in>
 							<Grid item xs={12} sm={6} md={6} lg={4} key={recipe.id}>
@@ -137,6 +144,8 @@ class recipeListing extends Component {
 												<Button size="small" color="primary" onClick={() => this.handleEditClick(recipe.id)}>
 													Edytuj
          										</Button>
+												<RecipeRating icon={<StarIcon />} ratingType="quality" recipeId={recipe.id} onRatingAdded={this.notifyRatingAdded}/>
+												<RecipeRating icon={<DifficultyIcon />} recipeId={recipe.id} ratingType="difficulty" onRatingAdded={this.notifyRatingAdded}/>
 												<Button color="secondary" className={classes.button} onClick={() => this.handleDelete(recipe.id)}>
 													Usuń
         											<DeleteIcon className={classes.rightIcon} />
