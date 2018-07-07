@@ -95,10 +95,8 @@ class recipeListing extends Component {
 						'aria-describedby': 'message-id',
 					}}
 					message={<span id="message-id">{this.state.snackbar}</span>} />
+				{this.props.match.path !== "/searchResults" && <Filters />}
 				<Grid container spacing={16}>
-					<Grid item xs={12}>
-						<Filters />
-					</Grid>
 					{this.props.recipes && this.props.recipes.map(recipe =>
 						<Grow key={recipe.id} in>
 							<Grid item xs={12} sm={6} md={6} lg={4} key={recipe.id}>
@@ -144,8 +142,8 @@ class recipeListing extends Component {
 												<Button size="small" color="primary" onClick={() => this.handleEditClick(recipe.id)}>
 													Edytuj
          										</Button>
-												<RecipeRating icon={<StarIcon />} ratingType="quality" recipeId={recipe.id} onRatingAdded={this.notifyRatingAdded}/>
-												<RecipeRating icon={<DifficultyIcon />} recipeId={recipe.id} ratingType="difficulty" onRatingAdded={this.notifyRatingAdded}/>
+												<RecipeRating icon={<StarIcon />} ratingType="quality" recipeId={recipe.id} onRatingAdded={this.notifyRatingAdded} />
+												<RecipeRating icon={<DifficultyIcon />} recipeId={recipe.id} ratingType="difficulty" onRatingAdded={this.notifyRatingAdded} />
 												<Button color="secondary" className={classes.button} onClick={() => this.handleDelete(recipe.id)}>
 													Usuń
         											<DeleteIcon className={classes.rightIcon} />

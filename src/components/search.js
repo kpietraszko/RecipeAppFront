@@ -12,6 +12,7 @@ import axios from 'axios';
 import ConfirmIcon from '@material-ui/icons/Done';
 import { Redirect } from 'react-router-dom';
 import { mapDispatchToPropsRecipes } from '../redux/recipes';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
 	container: {
@@ -21,7 +22,7 @@ const styles = theme => ({
 	textField: {
 		marginLeft: theme.spacing.unit,
 		marginRight: theme.spacing.unit,
-		width: "75%",
+		width: "80%",
 	}
 });
 class Search extends Component {
@@ -107,11 +108,12 @@ class Search extends Component {
 							onAdd={(chip) => this.handleAddChip(chip)}
 							onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
 							label="Wpisz składniki"
-							helperText="Potwierdź każdy klawiszem enter, znajdzie przepisy zawierające wszystkie podane składniki"
+							helperText="Potwierdź każdy klawiszem enter"
 							className={classes.textField}
 							classes={{ root: "chipInput" }}
 							name="ingredientsNames"
 						/>
+						<Typography variant="caption" style={{marginBottom: "20px"}}>Znajdzie przepisy zawierające wszystkie podane składniki.</Typography>
 						<Grid item xs={12} >
 							<Button type="submit" variant="fab" color="primary" className={classes.button}>
 								<ConfirmIcon />

@@ -52,7 +52,7 @@ class ResponsiveDrawer extends Component {
 		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
 	};
 	handleDrawerButtonClick = (path) => {
-		//this.setState({ redirect: path });
+		this.setState({ mobileOpen: false });
 		this.props.history.push(path);
 	}
 	render() {

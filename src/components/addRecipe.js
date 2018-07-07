@@ -206,7 +206,6 @@ class AddRecipe extends Component {
 									</FormControl>
 								</Grid>
 							</React.Fragment>)}
-						{/* TODO: walidacja (pewnie przez inputProps)*/}
 						<Grid item xs={12} >
 							{this.state.editing ?
 								<Button type="submit" variant="fab" color="primary" className={classes.button}>
