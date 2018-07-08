@@ -21,3 +21,6 @@
   padding: 7px 8px;
   display: flex;
   align-items: center; }
+
+.filterInputLabel {
+  font-size: 0.8em; }

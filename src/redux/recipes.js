@@ -10,7 +10,7 @@ export const actionsDescriptors = {
 	setRecipesAll: ["recipes"]
 }
 export const thunksDescriptors = {
-	setRecipesAll: () => axios.get("/recipe") //thunk dispatchuje akcję (opisaną wyżej) w .then tej funkcji
+	setRecipesAll: (filter) => axios.get("/recipe", { params: filter}) //thunk dispatchuje akcję (opisaną wyżej) w .then tej funkcji
 }
 export const mapDispatchToPropsRecipes = () => generateMapDispatchToProps(actionsDescriptors, thunksDescriptors);
 

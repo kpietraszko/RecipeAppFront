@@ -17,6 +17,7 @@ import ConfirmIcon from '@material-ui/icons/Done';
 
 import { mapDispatchToPropsIngredients } from '../redux/ingredients';
 import { Redirect } from 'react-router-dom';
+import Grow from '@material-ui/core/Grow';
 
 const styles = theme => ({
 	container: {
@@ -128,96 +129,98 @@ class AddRecipe extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<Grid container justify="center">
-				{this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
-				<Grid item xs={12} md={11} lg={8}>
-					<form className={classes.container} onKeyPress={this.onKeyPress} onSubmit={e => { this.handleSubmit(e) }}>
-						<TextField
-							fullWidth
-							className={classes.textField}
-							label="Nazwa przepisu"
-							value={this.state.name}
-							onChange={this.handleChange('name')}
-							margin="normal"
-							required
-						/>
-						<TextField
-							fullWidth
-							className={classes.textField}
-							label="Sposób przyrządzenia"
-							multiline
-							rows="4"
-							rowsMax="15"
-							value={this.state.description}
-							onChange={this.handleChange('description')}
-							margin="normal"
-							required
-						/>
-						<TextField
-							type="number"
-							fullWidth
-							className={classes.textField}
-							label="Czas przygotowania"
-							helperText="w minutach"
-							value={this.state.timeToMake}
-							onChange={this.handleChange('timeToMake')}
-							margin="normal"
-						/>
-						<ChipInput
-							fullWidth
-							value={this.state.ingredients}
-							onAdd={(chip) => this.handleAddChip(chip)}
-							onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
-							label="Wpisz składniki"
-							helperText="Potwierdź każdy klawiszem enter"
-							className={classes.textField}
-							classes={{ root: "chipInput" }}
-							name="ingredientsNames"
-						/>
-						{this.state.ingredients.map((ingredient, i) =>
-							<React.Fragment key={i}>
-								<Grid item xs={6}>
-									<TextField
-										type="number"
-										required
-										fullWidth
-										className={classes.textField}
-										label={`Ilość składnika ${ingredient}`}
-										value={this.state.ingredientsAmounts[i]}
-										onChange={(e) => this.handleChangeIngredientAmount(i, e)}
-										margin="normal"
-									/>
-								</Grid>
-								<Grid item xs={4} classes={{ item: "ingredientAmountGridItem" }}>
-									<FormControl required className={classes.formControl} fullWidth>
-										<InputLabel>Jednostka składnika {ingredient}</InputLabel>
-										<Select
-											value={this.state.ingredientsUnits[i]}
-											onChange={(e) => this.handleChangeIngredientUnit(i, e)}
-											inputProps={{
-												name: `unit${i}`,
-												id: `unit${i}`
-											}}
-										>
-											{amountUnits.map((unit, i) =>
-												<MenuItem key={i} value={i}>{unit}</MenuItem>
-											)}
-										</Select>
-									</FormControl>
-								</Grid>
-							</React.Fragment>)}
-						<Grid item xs={12} >
-							{this.state.editing ?
-								<Button type="submit" variant="fab" color="primary" className={classes.button}>
-									<ConfirmIcon />
-								</Button> :
-								<Button type="submit" variant="fab" color="primary" className={classes.button}>
-									<AddIcon />
-								</Button>}
-						</Grid>
-					</form>
+			<Grow in>
+				<Grid container justify="center">
+					{this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
+					<Grid item xs={12} md={11} lg={8}>
+						<form className={classes.container} onKeyPress={this.onKeyPress} onSubmit={e => { this.handleSubmit(e) }}>
+							<TextField
+								fullWidth
+								className={classes.textField}
+								label="Nazwa przepisu"
+								value={this.state.name}
+								onChange={this.handleChange('name')}
+								margin="normal"
+								required
+							/>
+							<TextField
+								fullWidth
+								className={classes.textField}
+								label="Sposób przyrządzenia"
+								multiline
+								rows="4"
+								rowsMax="15"
+								value={this.state.description}
+								onChange={this.handleChange('description')}
+								margin="normal"
+								required
+							/>
+							<TextField
+								type="number"
+								fullWidth
+								className={classes.textField}
+								label="Czas przygotowania"
+								helperText="w minutach"
+								value={this.state.timeToMake}
+								onChange={this.handleChange('timeToMake')}
+								margin="normal"
+							/>
+							<ChipInput
+								fullWidth
+								value={this.state.ingredients}
+								onAdd={(chip) => this.handleAddChip(chip)}
+								onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
+								label="Wpisz składniki"
+								helperText="Potwierdź każdy klawiszem enter"
+								className={classes.textField}
+								classes={{ root: "chipInput" }}
+								name="ingredientsNames"
+							/>
+							{this.state.ingredients.map((ingredient, i) =>
+								<React.Fragment key={i}>
+									<Grid item xs={6}>
+										<TextField
+											type="number"
+											required
+											fullWidth
+											className={classes.textField}
+											label={`Ilość składnika ${ingredient}`}
+											value={this.state.ingredientsAmounts[i]}
+											onChange={(e) => this.handleChangeIngredientAmount(i, e)}
+											margin="normal"
+										/>
+									</Grid>
+									<Grid item xs={4} classes={{ item: "ingredientAmountGridItem" }}>
+										<FormControl required className={classes.formControl} fullWidth>
+											<InputLabel>Jednostka składnika {ingredient}</InputLabel>
+											<Select
+												value={this.state.ingredientsUnits[i]}
+												onChange={(e) => this.handleChangeIngredientUnit(i, e)}
+												inputProps={{
+													name: `unit${i}`,
+													id: `unit${i}`
+												}}
+											>
+												{amountUnits.map((unit, i) =>
+													<MenuItem key={i} value={i}>{unit}</MenuItem>
+												)}
+											</Select>
+										</FormControl>
+									</Grid>
+								</React.Fragment>)}
+							<Grid item xs={12} >
+								{this.state.editing ?
+									<Button type="submit" variant="fab" color="primary" className={classes.button}>
+										<ConfirmIcon />
+									</Button> :
+									<Button type="submit" variant="fab" color="primary" className={classes.button}>
+										<AddIcon />
+									</Button>}
+							</Grid>
+						</form>
+					</Grid>
 				</Grid>
-			</Grid>
+			</Grow>
 		);
 	}
 }

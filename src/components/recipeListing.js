@@ -78,6 +78,9 @@ class recipeListing extends Component {
 	notifyRatingAdded = () => {
 		this.setState({ snackbar: "Dodano ocenę" });
 	}
+	handleFilter = (filter) => {
+		this.props.setRecipesAllThunk(filter);
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -95,7 +98,7 @@ class recipeListing extends Component {
 						'aria-describedby': 'message-id',
 					}}
 					message={<span id="message-id">{this.state.snackbar}</span>} />
-				{this.props.match.path !== "/searchResults" && <Filters />}
+				{this.props.match.path !== "/searchResults" && <Filters onFilter={this.handleFilter}/>}
 				<Grid container spacing={16}>
 					{this.props.recipes && this.props.recipes.map(recipe =>
 						<Grow key={recipe.id} in>

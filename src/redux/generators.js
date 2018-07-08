@@ -23,9 +23,9 @@ const generateThunkCreators = (actionCreators, thunksDescriptors) => {
 		return null;
 	let thunkCreators = {};
 	for (let key in thunksDescriptors) {
-		thunkCreators[key] = (...args) => {
+		thunkCreators[key] = (arg) => {
 			return dispatch => {
-				thunksDescriptors[key](args)
+				thunksDescriptors[key](arg)
 					.then(response => {
 						dispatch(actionCreators[key](response.data));
 					})

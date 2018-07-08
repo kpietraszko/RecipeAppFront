@@ -6,13 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ChipInput from 'material-ui-chip-input';
 import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import ConfirmIcon from '@material-ui/icons/Done';
 import { Redirect } from 'react-router-dom';
 import { mapDispatchToPropsRecipes } from '../redux/recipes';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Grow from '@material-ui/core/Grow';
 
 const styles = theme => ({
 	container: {
@@ -80,48 +79,50 @@ class Search extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<Grid container justify="center">
-				{this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
-				<Grid item xs={12} md={11} lg={8}>
-					<form className={classes.container} onKeyPress={this.onKeyPress} onSubmit={e => { this.handleSubmit(e) }}>
-						<TextField
-							fullWidth
-							className={classes.textField}
-							label="Nazwa przepisu"
-							value={this.state.name}
-							onChange={this.handleChange('name')}
-							margin="normal"
-						/>
-						<TextField
-							type="number"
-							fullWidth
-							className={classes.textField}
-							label="Maksymalny czas przygotowania"
-							helperText="w minutach"
-							value={this.state.timeToMake}
-							onChange={this.handleChange('timeToMake')}
-							margin="normal"
-						/>
-						<ChipInput
-							fullWidth
-							value={this.state.ingredients}
-							onAdd={(chip) => this.handleAddChip(chip)}
-							onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
-							label="Wpisz składniki"
-							helperText="Potwierdź każdy klawiszem enter"
-							className={classes.textField}
-							classes={{ root: "chipInput" }}
-							name="ingredientsNames"
-						/>
-						<Typography variant="caption" style={{marginBottom: "20px"}}>Znajdzie przepisy zawierające wszystkie podane składniki.</Typography>
-						<Grid item xs={12} >
-							<Button type="submit" variant="fab" color="primary" className={classes.button}>
-								<ConfirmIcon />
-							</Button>
-						</Grid>
-					</form>
+			<Grow in>
+				<Grid container justify="center">
+					{this.state.redirectTo && <Redirect to={this.state.redirectTo} />}
+					<Grid item xs={12} md={11} lg={8}>
+						<form className={classes.container} onKeyPress={this.onKeyPress} onSubmit={e => { this.handleSubmit(e) }}>
+							<TextField
+								fullWidth
+								className={classes.textField}
+								label="Nazwa przepisu"
+								value={this.state.name}
+								onChange={this.handleChange('name')}
+								margin="normal"
+							/>
+							<TextField
+								type="number"
+								fullWidth
+								className={classes.textField}
+								label="Maksymalny czas przygotowania"
+								helperText="w minutach"
+								value={this.state.timeToMake}
+								onChange={this.handleChange('timeToMake')}
+								margin="normal"
+							/>
+							<ChipInput
+								fullWidth
+								value={this.state.ingredients}
+								onAdd={(chip) => this.handleAddChip(chip)}
+								onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
+								label="Wpisz składniki"
+								helperText="Potwierdź każdy klawiszem enter"
+								className={classes.textField}
+								classes={{ root: "chipInput" }}
+								name="ingredientsNames"
+							/>
+							<Typography variant="caption" style={{ marginBottom: "20px" }}>Znajdzie przepisy zawierające wszystkie podane składniki.</Typography>
+							<Grid item xs={12} >
+								<Button type="submit" variant="fab" color="primary" className={classes.button}>
+									<ConfirmIcon />
+								</Button>
+							</Grid>
+						</form>
+					</Grid>
 				</Grid>
-			</Grid>
+			</Grow>
 		);
 	}
 }

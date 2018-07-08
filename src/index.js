@@ -17,7 +17,7 @@ const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 
-axios.defaults.baseURL = "https://kulinarnaapi20180706045053.azurewebsites.net/api";//"http://localhost:11027/api";
+axios.defaults.baseURL = "http://localhost:11027/api"; //"https://kulinarnaapi20180706045053.azurewebsites.net/api";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
 	rootReducer,

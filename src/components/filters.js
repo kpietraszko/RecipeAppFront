@@ -4,6 +4,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import StarIcon from '@material-ui/icons/Star';
 import DifficultyIcon from '@material-ui/icons/Build';
 import FilterIcon from '@material-ui/icons/FilterList';
+import { connect } from 'react-redux';
 
 {/* jakość, trudność, czas przygotowania */ }
 class filters extends Component {
@@ -27,17 +28,23 @@ class filters extends Component {
 		this.setState({ chosenDifficulty: value });
 	}
 	handleFilter = () => {
-
+		const filter = { 
+			minQualityRating: this.state.chosenQuality,
+			maxDifficultyRating: this.state.chosenDifficulty,
+			maxTimeToMake: this.state.maxTimeToMake
+		}
+		this.props.onFilter(filter);
 	}
 	clear = () => {
 		this.setState({ chosenQuality: 0, chosenDifficulty: 0, qualityHighlighted: 0, difficultyHighlighted: 0 });
+		this.props.onFilter();
 	}
 	render() {
 		return (
-			<Grid container justify="flex-start" alignItems="center" /* xs={12} md={12} lg={9} */ spacing={24} style={{marginLeft: "5px"}}>
+			<Grid container justify="flex-start" alignItems="center" spacing={24} style={{marginLeft: "5px"}}>
 				<Typography variant="subheading">Filtry: </Typography>
-				<Button variant="flat" size="small" color="primary" style={{ marginLeft: "20px"}} onClick={this.clear}>Wyczyść</Button>
-				<Grid item container alignItems="center" direction="column" style={{ width: "160px", margin: "5px" }}>
+				<Button variant="flat" size="small" color="primary" style={{ marginLeft: "10px"}} onClick={this.clear}>Wyczyść</Button>
+				<Grid item container alignItems="center" direction="column" style={{ width: "160px" }}>
 					<FormLabel>Min. ocena jakości</FormLabel>
 					<StarRatingComponent
 						name={`${this.props.ratingType}${this.props.recipeId}`}
@@ -51,7 +58,7 @@ class filters extends Component {
 						editing={true}
 					/>
 				</Grid>
-				<Grid item container alignItems="center" direction="column" style={{ width: "190px", margin: "5px" }}>
+				<Grid item container alignItems="center" direction="column" style={{ width: "190px" }}>
 					<FormLabel>Maks. ocena trudności</FormLabel>
 					<StarRatingComponent
 						name={`${this.props.ratingType}${this.props.recipeId}`}
@@ -65,7 +72,7 @@ class filters extends Component {
 						editing={true}
 					/>
 				</Grid>
-				<Grid item style={{ marginRight: "15px", width: "215px" }}>
+				<Grid item style={{ width: "180px" }}>
 					<TextField
 						type="number"
 						fullWidth
@@ -73,6 +80,8 @@ class filters extends Component {
 						helperText="w minutach"
 						value={this.state.maxTimeToMake}
 						onChange={e => this.setState({ maxTimeToMake: e.target.value })}
+						margin="dense"
+						InputLabelProps={{classes: {root: "filterInputLabel"}}}
 					/>
 				</Grid>
 				{/* <Grid item xs> */}
