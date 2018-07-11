@@ -19,7 +19,8 @@ export const thunksDescriptors = {
 						{
 							username: "testUser",
 							password: "qwerty"
-						}
+						},
+						withCredentials: true
 					});
 			}
 		})
