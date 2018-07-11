@@ -91,12 +91,9 @@ class recipeListing extends Component {
 						vertical: 'bottom',
 						horizontal: 'left',
 					}}
-					open={this.state.snackbar}
+					open={!!this.state.snackbar}
 					autoHideDuration={3000}
 					onClose={this.handleClose}
-					ContentProps={{
-						'aria-describedby': 'message-id',
-					}}
 					message={<span id="message-id">{this.state.snackbar}</span>} />
 				{this.props.match.path !== "/searchResults" && <Filters onFilter={this.handleFilter}/>}
 				<Grid container spacing={16}>

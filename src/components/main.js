@@ -11,7 +11,8 @@ const styles = theme => ({
 		flexGrow: 1,
 		backgroundColor: theme.palette.background.default,
 		padding: theme.spacing.unit * 3,
-		overflow: "auto"
+		overflow: "scroll",
+		overflowX: "hidden"
 	},
 });
 class Main extends Component {
